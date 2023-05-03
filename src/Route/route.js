@@ -8,7 +8,7 @@ route.post('/user/signup',userCreate)      // new user create
 route.post("/user/login",userLogin)        //login with existing user and get token
 
 //ticket route
-route.post("/ticket",authentication,ticketGenarate)      //create ticket
+route.post("/ticket",authentication,ticketGenarate)      //create ticket, {"numberOfTicket" :  x } => here x is a number that defines that how many tickets you want to create
 route.get("/ticket/:creation_id",findTicketByCreationId) //get ticket by ticket's creation id
 
 

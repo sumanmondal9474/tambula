@@ -44,7 +44,7 @@ const findTicketByCreationId = async (req,res)=>{
         if(tickets.length === 0 ) return res.status(400).send({status:false,msg:"no ticket found"})
 
         tickets = tickets.map((e)=>e.ticket)
-        return res.status(200).send({status:true,creation_id,tickets})
+        return res.status(200).send({status:true, creation_id, numberOfTickets:tickets.length, tickets})
 
     } catch (error) {
         res.status(500).send({status:false,msg:error.message})
