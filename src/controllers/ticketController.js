@@ -1,5 +1,5 @@
 const ticketModel = require('../models/ticketModel')
-const tambola = require('tambola');
+const {tambula} = require('../helperModule/helper');
 const shortId = require('shortid');
 
 
@@ -19,7 +19,7 @@ const ticketGenarate = async (req, res)=>{
         const creation_id = shortId.generate()
         
         for(let i =1;i<=numberOfTicket;i++){
-            const ticket = tambola.generateTicket()
+            const ticket = tambula()
             const ticketDoc = { creation_id, ticket }
             tickets.push(ticketDoc)
         }
@@ -38,7 +38,7 @@ const findTicketByCreationId = async (req,res)=>{
     try {
         const {creation_id} = req.params
         //ticket creation id validation
-        if(shortId.isValid(creation_id)) return res.status(400).send({status:false, msg:`invalid ticket creation id`})
+        if(!shortId.isValid(creation_id)) return res.status(400).send({status:false, msg:`invalid ticket creation id`})
 
         let tickets = await ticketModel.find({creation_id}).select({_id:0,ticket:1})
         if(tickets.length === 0 ) return res.status(400).send({status:false,msg:"no ticket found"})
